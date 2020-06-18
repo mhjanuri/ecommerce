@@ -2,12 +2,14 @@ const express = require('express');
 const mongoose = require('mongoose');
 require('dotenv').config();
 
+const userRoute = require('./routes/user')
+
 // App
 const app = express();
 
 // DB
 mongoose
-    .connect(process.env.DATABASE, {
+    .connect(process.env.MONGO_URI, {
         useNewUrlParser: true,
         useCreateIndex: true,
         useUnifiedTopology: true
@@ -15,13 +17,11 @@ mongoose
     .then(() => console.log('DB Connected'));
 
 mongoose.connection.on('error', err => {
-    console.log(`DB connection error: ${err.message}`)
+    console.log(`DB connection error: ${err.message}`);
 });
 
-// Routes
-app.get('/', (req, res) => {
-    res.send('hello from the backend side');
-});
+// Routes middleware
+app.use('/api', (userRoute));
 
 const PORT = process.env.PORT || 2020;
 
