@@ -6,7 +6,7 @@ const cookieParser = require('cookie-parser');
 const expressValidator = require('express-validator');
 require('dotenv').config();
 
-const userRoute = require('./routes/user')
+const authRoute = require('./routes/auth')
 
 // App
 const app = express();
@@ -32,7 +32,7 @@ app.use(cookieParser());
 app.use(expressValidator());
 
 // Routes Middleware
-app.use('/api', (userRoute));
+app.use('/api', (authRoute));
 
 
 const PORT = process.env.PORT || 2020;
