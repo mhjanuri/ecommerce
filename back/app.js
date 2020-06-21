@@ -5,9 +5,11 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const expressValidator = require('express-validator');
 require('dotenv').config();
+
 // import routes
-const authRoute = require('./routes/auth')
-const userRoute = require('./routes/user')
+const authRoutes = require('./routes/auth')
+const userRoutes = require('./routes/user')
+const categoryRoutes = require('./routes/category')
 
 // App
 const app = express();
@@ -33,8 +35,9 @@ app.use(cookieParser());
 app.use(expressValidator());
 
 // Routes Middleware
-app.use('/api', (authRoute));
-app.use('/api', (userRoute));
+app.use('/api', (authRoutes));
+app.use('/api', (userRoutes));
+app.use('/api', (categoryRoutes));
 
 
 const PORT = process.env.PORT || 2020;
