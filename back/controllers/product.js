@@ -67,7 +67,7 @@ exports.create = (req, res) => {
             }
 
             product.photo.data = fs.readFileSync(files.photo.path);
-            product.photo.contentType = files.photo.type
+            product.photo.contentType = files.photo.type;
         }
 
         product.save((error, result) => {
@@ -91,8 +91,8 @@ exports.remove = (req, res) => {
         }
         res.json({
             "message": `Product ${deletedProduct.name} deleted successfully`
-        })
-    })
+        });
+    });
 };
 
 exports.update = (req, res) => {
@@ -142,16 +142,65 @@ exports.update = (req, res) => {
             }
 
             product.photo.data = fs.readFileSync(files.photo.path);
-            product.photo.contentType = files.photo.type
+            product.photo.contentType = files.photo.type;
         }
 
         product.save((error, result) => {
             if (error) {
                 return res.status(400).json({
                     error: errorHandler(error)
-                })
+                });
             }
-            res.json(result)
+            res.json(result);
         });
     });
+};
+
+
+/**
+ * sell / arival
+ * by sell = /products?sortBy=sold&order=desc&limit=4
+ * by arrival = /products?sortBy=createdAt&order=desc&limit=4
+ * if no params are sent, then all products are returned
+ */
+
+
+exports.list = (req, res) => {
+    let order = req.query.order ? req.query.order : 'asc';
+    let sortBy = req.query.sortBy ? req.query.sortBy : '_id';
+    let limit = req.query.limit ? parseInt(req.query.limit) : 6;
+
+    Product.find()
+        .select("-photo")
+        .populate('category')
+        .sort([[sortBy, order]])
+        .limit(limit)
+        .exec((error, products) => {
+            if (error) {
+                return res.status(400).json({
+                    error: 'Products not found'
+                });
+            }
+            res.json(products);
+        });
+};
+
+/**
+ * it will find the product based on the req product category
+ * other product that has the same category,will be returned
+ */
+exports.listRelated = (req, res) => {
+    let limit = req.query.limit ? parseInt(req.query.limit) : 6;
+
+    Product.find({ _id: { $ne: req.product }, category: req.product.category })
+        .limit(limit)
+        .populate('category', '_id name')
+        .exec((error, products) => {
+            if (error) {
+                return res.status(400).json({
+                    error: 'Products not found'
+                });
+            }
+            res.json(products);
+        });
 };
