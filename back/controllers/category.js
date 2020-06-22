@@ -28,3 +28,41 @@ exports.create = (req, res) => {
 exports.read = (req, res) => {
     return res.json(req.category);
 };
+
+exports.update = (req, res) => {
+    const category = req.category;
+    category.name = req.body.name;
+    category.save((error, data) => {
+        if (error) {
+            return res.status(400).json({
+                error: errorHandler(error)
+            });
+        }
+        res.json(data);
+    })
+};
+
+exports.remove = (req, res) => {
+    const category = req.category;
+    category.remove((error, data) => {
+        if (error) {
+            return res.status(400).json({
+                error: errorHandler(error)
+            });
+        }
+        res.json({
+            message: `Category ${data.name} deleted`
+        });
+    });
+};
+
+exports.list = (req, res) => {
+    Category.find().exec((error, data) => {
+        if (error) {
+            return res.status(400).json({
+                error: errorHandler(error)
+            });
+        }
+        res.json(data);
+    });
+};
