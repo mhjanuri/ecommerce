@@ -4,10 +4,7 @@ import Layout from '../core/Layout';
 const Dashboard = () => {
 
     return (
-        <Layout
-            title="Dashboard"
-            description="User Dashboard"
-        >
+        <Layout title="Dashboard" description="User Dashboard">
             ...
         </Layout>
     );
