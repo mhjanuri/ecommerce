@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { createProduct } from './apiAdmin';
 
 const AddProduct = () => {
+    const { user, token } = isAuthenticated();
     const [values, setValues] = useState({
         name: '',
         description: '',
@@ -46,8 +47,12 @@ const AddProduct = () => {
         setValues({ ...values, [name]: value });
     };
 
+    const clickSubmit = event => {
+        //
+    };
+
     const newPostForm = () => (
-        <form className="mb-3">
+        <form className="mb-3" onSubmit={clickSubmit}>
             <h4>Post Photo</h4>
             <div className="form-group">
                 <label className="btn btn-secondary">
@@ -124,8 +129,6 @@ const AddProduct = () => {
 
         </form>
     )
-
-    const { user, token } = isAuthenticated();
 
     return (
         <Layout
