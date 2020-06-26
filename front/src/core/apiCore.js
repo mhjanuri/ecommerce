@@ -1,7 +1,7 @@
 import { API_URL } from '../config';
 
 export const getProducts = (sortBy) => {
-    return fetch(`${API_URL}/products?sortBy${sortBy}&order=desc&limit=6`, {
+    return fetch(`${API_URL}/products?sortBy=${sortBy}&order=desc&limit=6`, {
         method: "GET"
     })
         .then(response => {
