@@ -1,6 +1,6 @@
 /**
-* border radius
-*/
+ * border radius
+ */
 
 .btn,
 .jumbotron,
@@ -9,8 +9,8 @@
 }
 
 /**
-* product image on card
-*/
+ * product image on card
+ */
 
 .product-img {
   min-height: 100px;
@@ -27,8 +27,8 @@
 }
 
 /**
-* jumbotron animation
-*/
+ * jumbotron animation
+ */
 
 .jumbotron {
   width: 30wh;
