@@ -34,9 +34,25 @@ const Home = () => {
     }, []);
 
     return (
-        <Layout title="Homepage" description="Node React E-commerce App">
+        <Layout
+            title="Homepage"
+            description="Node React E-commerce App"
+            className="container-fluid"
+        >
+            <h2 className="mb-4">New Arrival</h2>
+            <div className="row">
+                {productByArrival.map((product, i) => (
+                    <Card key={i} product={product} />
+                ))}
+            </div>
+
             <h2 className="mb-4">Best  Sellers</h2>
-            {productBySell}
+            <div className="row">
+                {productBySell.map((product, i) => (
+                    <Card key={i} product={product} />
+                ))}
+            </div>
+
         </Layout>
     );
 };
