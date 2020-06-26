@@ -48,7 +48,25 @@ const AddProduct = () => {
     };
 
     const clickSubmit = event => {
-        //
+        event.preventDefault();
+        setValues({ ...values, error: '', loading: true });
+
+        createProduct(user._id, token, formData).then(data => {
+            if (data.error) {
+                setValues({ ...values, error: data.error })
+            } else {
+                setValues({
+                    ...values,
+                    name: '',
+                    description: '',
+                    photo: '',
+                    price: '',
+                    quantity: '',
+                    loading: false,
+                    createdProduct: data.name
+                });
+            }
+        });
     };
 
     const newPostForm = () => (
@@ -101,6 +119,7 @@ const AddProduct = () => {
                     className="form-control"
                 >
                     <option value="5ef4cda2305ff1395879349b">Python</option>
+                    <option value="5ef4cda2305ff1395879349b">PhP</option>
                 </select>
             </div>
 
@@ -125,7 +144,7 @@ const AddProduct = () => {
                 />
             </div>
 
-            <button className="" btn btn-outline-primary>Create Product</button>
+            <button className="btn btn-outline-primary">Create Product</button>
 
         </form>
     )
