@@ -30,13 +30,13 @@ const Shop = () => {
         });
     };
 
-    const loadFilteredResults = (newFilters) => {
+    const loadFilteredResults = newFilters => {
         // console.log(newFilters);
         getFilteredProducts(skip, limit, newFilters).then(data => {
             if (data.error) {
                 setError(data.error);
             } else {
-                setFilteredResults(data);
+                setFilteredResults(data.data);
             }
         });
     };
@@ -51,7 +51,7 @@ const Shop = () => {
         const newFilters = { ...myFilters };
         newFilters.filters[filterBy] = filters;
 
-        if (filterBy == "price") {
+        if (filterBy === "price") {
             let priceValues = handlePrice(filters);
             newFilters.filters[filterBy] = priceValues;
         }
@@ -97,8 +97,16 @@ const Shop = () => {
                         />
                     </div>
                 </div>
+
                 <div className="col-8">
-                    {JSON.stringify(filteredResults)}
+                    <h2 className="mb-4">Products</h2>
+                    <div className="row">
+                        {filteredResults.map((product, i) => (
+                            <div key={i} className="col-6 mb-3">
+                                <Card product={product} />
+                            </div>
+                        ))}
+                    </div>
                 </div>
             </div>
         </Layout>
