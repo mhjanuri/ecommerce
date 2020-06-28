@@ -18,7 +18,7 @@ const Shop = () => {
     const [error, setError] = useState(false);
     const [limit, setLimit] = useState(6);
     const [skip, setSkip] = useState(0);
-    const [filteredResults, setFilteredResults] = useState(0);
+    const [filteredResults, setFilteredResults] = useState([]);
 
     const init = () => {
         getCategories().then(data => {
@@ -102,9 +102,7 @@ const Shop = () => {
                     <h2 className="mb-4">Products</h2>
                     <div className="row">
                         {filteredResults.map((product, i) => (
-                            <div key={i} className="col-6 mb-3">
-                                <Card product={product} />
-                            </div>
+                            <Card key={i} product={product} />
                         ))}
                     </div>
                 </div>
