@@ -25,13 +25,12 @@ const Product = (props) => {
 
     return (
         <Layout
-            title="Homepage"
-            description="Node React E-commerce App"
+            title={product && product.name}
+            description={product && product.description && product.description.substring(0, 100)}
             className="container-fluid"
         >
-            <h2 className="mb-4">Single product</h2>
             <div className="row">
-                {JSON.stringify(product)}
+                {product && product.description && <Card product={product} showViewProductButton={false} />}
             </div>
         </Layout>
     );
