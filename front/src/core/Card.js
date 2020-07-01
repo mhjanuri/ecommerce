@@ -1,8 +1,8 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import ShowImage from './ShowImage';
 import moment from 'moment';
-import {addItem} from './cartHelper';
+import { addItem } from './cartHelpers';
 
 const Card = ({ product, showViewProductButton = true }) => {
     const [redirect, setRedirect] = useState(false);
@@ -43,8 +43,8 @@ const Card = ({ product, showViewProductButton = true }) => {
         return quantity > 0 ? (
             <span className="badge badge-primary badge-pill">In Stock</span>
         ) : (
-            <span className="badge badge-warning badge-pill">Out of Stock</span>
-        );
+                <span className="badge badge-warning badge-pill">Out of Stock</span>
+            );
     };
 
     return (
@@ -63,7 +63,7 @@ const Card = ({ product, showViewProductButton = true }) => {
                 </p>
 
                 {showStock(product.quantity)}
-                <br/>
+                <br />
 
                 {showViewButton(showViewProductButton)}
 
