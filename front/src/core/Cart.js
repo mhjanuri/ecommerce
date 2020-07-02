@@ -22,6 +22,7 @@ const Cart = () => {
                         key={i}
                         product={product}
                         showAddToCartButton={false}
+                        cartUpdate={true}
                     />
                 ))}
             </div>
