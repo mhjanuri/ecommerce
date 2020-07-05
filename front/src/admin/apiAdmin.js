@@ -58,7 +58,7 @@ export const listOrders = (userId, token) => {
         }
     })
         .then(response => {
-            return response.json()
+            return response.json();
         })
         .catch(error => {
             console.log(error);

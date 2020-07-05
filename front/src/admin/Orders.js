@@ -16,11 +16,11 @@ const Orders = () => {
             } else {
                 setOrders(data)
             }
-        })
+        });
     };
 
     useEffect(() => {
-        loadOrders()
+        loadOrders();
     }, []);
 
     const noOrders = orders => {
@@ -40,6 +40,6 @@ const Orders = () => {
             </div>
         </Layout>
     );
-}
+};
 
 export default Orders;
