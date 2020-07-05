@@ -11,7 +11,7 @@ import { isAuthenticated } from '../auth'
 import { Link } from 'react-router-dom';
 import DropIn from 'braintree-web-drop-in-react';
 
-const Checkout = ({ products }) => {
+const Checkout = ({ products, setRun = f => f, run = undefined }) => {
 
     const [data, setData] = useState({
         success: false,
@@ -62,7 +62,7 @@ const Checkout = ({ products }) => {
             .then(data => {
                 // console.log(data);
                 nonce = data.nonce;
-                // once we have nonce (card typr, card number), send nonce as 'paymentMethodNonce'
+                // once we have nonce (card type, card number), send nonce as 'paymentMethodNonce'
                 // and also total to be charged
                 // console.log(
                 //     'send nonce and total to process: ',
