@@ -14,6 +14,7 @@ import DropIn from 'braintree-web-drop-in-react';
 const Checkout = ({ products, setRun = f => f, run = undefined }) => {
 
     const [data, setData] = useState({
+        loading: false,
         success: false,
         clientToken: null,
         error: '',
@@ -55,6 +56,7 @@ const Checkout = ({ products, setRun = f => f, run = undefined }) => {
     };
 
     const buy = () => {
+        setData({ loading: true });
         // send the nonce to your server 
         // nonce = data.instance.requestPaymentMethod()
         let nonce;
@@ -80,12 +82,16 @@ const Checkout = ({ products, setRun = f => f, run = undefined }) => {
                         setData({ ...data, success: response.success });
                         emptyCart(() => {
                             console.log("payment success and empty cart");
+                            setData({ loading: false });
                         });
                         // empty cart 
                         // create order
 
                     })
-                    .catch(error => console.log(error));
+                    .catch(error => {
+                        console.log(error);
+                        setData({ loading: false });
+                    });
             })
             .catch(error => {
                 // console.log('dropIn error: ', error);
@@ -98,10 +104,17 @@ const Checkout = ({ products, setRun = f => f, run = undefined }) => {
             {data.clientToken !== null && products.length > 0 ? (
                 <div>
                     <DropIn
-                        options={{ authorization: data.clientToken }}
+                        options={{
+                            authorization: data.clientToken,
+                            paypal: {
+                                flow: "vault"
+                            }
+                        }}
                         onInstance={instance => (data.instance = instance)}
                     />
-                    <button onClick={buy} className="btn btn-success btn-block">Pay</button>
+                    <button onClick={buy} className="btn btn-success btn-block">
+                        Pay
+                    </button>
                 </div>
             ) : null}
         </div>
@@ -125,9 +138,13 @@ const Checkout = ({ products, setRun = f => f, run = undefined }) => {
         </div>
     );
 
+    const showLoading = loading => loading && <h2>Loading...</h2>
+
+
     return (
         <div>
             <h2>Total: ${getTotal()}</h2>
+            {showLoading(data.loading)}
             {showSuccess(data.success)}
             {showError(data.error)}
             {showCheckout()}
