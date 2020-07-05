@@ -16,7 +16,7 @@ exports.create = (req, res) => {
     });
 };
 
-exports.listOrders = () => {
+exports.listOrders = (req, res) => {
     Order.find()
         .populate('user', "_id name address")
         .sort('-created')
