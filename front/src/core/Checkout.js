@@ -89,7 +89,7 @@ const Checkout = ({ products, setRun = f => f, run = undefined }) => {
                         // create order
                         const createOrderData = {
                             products: products,
-                            transaction_id: response.transaction_id,
+                            transaction_id: response.transaction.id,
                             amount: response.transaction.amount,
                             address: data.address
                         }
