@@ -71,13 +71,13 @@ exports.addOrderToUserHistory = (req, res, next) => {
 exports.purchaseHistory = (req, res) => {
     Order.find({ user: req.profile._id })
         .populate('user', '_id name')
-        .sort(-created)
+        .sort("-created")
         .exec((error, orders) => {
             if (error) {
                 return res.status(400).json({
                     error: errorHandler(error)
                 });
             }
-            res.json(order);
+            res.json(orders);
         });
 };
