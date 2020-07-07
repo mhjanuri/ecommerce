@@ -41,6 +41,10 @@ const ManageProducts = () => {
         >
             <div className="row">
                 <div className="col-12">
+                    <h2 className="text-center">
+                        Total {products.length} Product(s)
+                    </h2>
+                    <hr />
                     <ul className="list-group">
                         {products.map((p, i) => (
                             <li
@@ -55,6 +59,7 @@ const ManageProducts = () => {
                                 </Link>
                                 <span
                                     onClick={() => destroy(p._id)}
+                                    style={{ cursor: "pointer" }}
                                     className="badge badge-danger badge-pill"
                                 >
                                     Delete
