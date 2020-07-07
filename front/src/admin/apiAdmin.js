@@ -98,3 +98,69 @@ export const updateOrderStatus = (userId, token, orderId, status) => {
             console.log(error);
         });
 };
+
+/**
+ * to perform crud on product 
+ * get all products 
+ * get a single product 
+ * update single product 
+ * delete single product 
+ */
+
+export const getProducts = () => {
+    return fetch(`${API_URL}/products`, {
+        method: "GET"
+    })
+        .then(response => {
+            return response.json()
+        })
+        .catch(error => {
+            console.log(error);
+        });
+};
+
+export const deleteProduct = (productId, userId, token) => {
+    return fetch(`${API_URL}/product/${productId}/${userId}`, {
+        method: "DELETE",
+        headers: {
+            Accept: 'application/json',
+            "Content-type": 'application/json',
+            Authorization: `Bearer ${token}`
+        }
+    })
+        .then(response => {
+            return response.json();
+        })
+        .catch(error => {
+            console.log(error);
+        });
+};
+
+export const getProduct = (productId) => {
+    return fetch(`${API_URL}/product/${productId}`, {
+        method: "GET"
+    })
+        .then(response => {
+            return response.json()
+        })
+        .catch(error => {
+            console.log(error);
+        });
+};
+
+export const updateProduct = (productId, userId, token, product) => {
+    return fetch(`${API_URL}/product/${productId}/${userId}`, {
+        method: "PUT",
+        headers: {
+            Accept: 'application/json',
+            Authorization: `Bearer ${token}`
+        },
+        body: product
+    })
+        .then(response => {
+            return response.json();
+        })
+        .catch(error => {
+            console.log(error);
+        });
+};

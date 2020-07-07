@@ -12,7 +12,6 @@ const ManageProducts = () => {
             description="Perform CRUD on products"
             className="container-fluid"
         >
-            <h2 className="mb-4">Manage Products</h2>
             <div className="row">
                 <div>...</div>
             </div>
